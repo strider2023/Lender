@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Lender</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="my_profile">My Profile</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="facebook_connect">Connect With Facebook</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="registered_email">Registered Email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="go_back">Go Back</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify">Verify OTP</string>
+    <string name="re_generate_otp">Re-Generate OTP</string>
+    <string name="yup_its_me">Yup It\'s Me</string>
+    
+    <string name="msg_mobile_otp_main">Sit back and relax, while we verify your mobile number.</string>
+    <string name="msg_mobile_otp_secondary">Enter the OTP code manually, in case we fail to detect SMS automatically.</string>
+    <string name="msg_sign_up_main">Almost Done</string>
+    <string name="msg_sign_up_secondary">Just check if we got your profile info correct. If not please do let us know!</string>
+
+    <string name="screen1_title">Unlimited Calls</string>
+    <string name="screen1_desc">Call your friends, family, Relatives free of cost anytime anywhere.</string>
+    <string name="screen2_title">Group Conversations</string>
+    <string name="screen2_desc">Create your own group and share Snapshots, Videos etc. </string>
+    <string name="screen3_title">Synchronize with your laptop</string>
+    <string name="screen3_desc">Get notified with your calls and messages to your laptop</string>
+
+    <array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </array>
+
+    <array name="marital_status">
+        <item>Single</item>
+        <item>Married</item>
+        <item>Divorced</item>
+        <item>Separated</item>
+        <item>Widowed</item>
+    </array>
+
+    <array name="employment_status">
+        <item>Student</item>
+        <item>Unemployed</item>
+        <item>Salaried</item>
+        <item>Self-Employed</item>
+    </array>
+
+    <array name="residential_status">
+        <item>Owned</item>
+        <item>Rental</item>
+        <item>Parental</item>
+        <item>Temporary Sharing</item>
+    </array>
+    <array name="educational_degree">
+        <item>Class X</item>
+        <item>Class XII</item>
+        <item>Under Graduation</item>
+        <item>Post Graduation</item>
+        <item>PhD</item>
+    </array>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="action_settings">Settings</string>
+</resources>

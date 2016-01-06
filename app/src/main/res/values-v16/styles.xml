@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="AppTheme.NoActionBar">
+                <item name="windowActionBar">false</item>
+                <item name="windowNoTitle">true</item>
+                <item name="android:spinnerItemStyle">@style/AppSpinnerItem</item>
+        </style>
+
+        <style name="SplashEdditext">
+                <item name="android:gravity">center</item>
+                <item name="android:layout_margin">10dp</item>
+                <item name="android:textColor">@android:color/white</item>
+                <item name="android:textColorHint">@color/colorAccent</item>
+                <item name="android:singleLine">true</item>
+                <item name="android:fontFamily">sans-serif-light</item>
+                <item name="android:background">@android:color/transparent</item>
+        </style>
+
+        <style name="SignUpTextView">
+                <item name="android:gravity">center</item>
+                <item name="android:textColor">@android:color/white</item>
+                <item name="android:fontFamily">sans-serif-light</item>
+                <item name="android:drawablePadding">5dp</item>
+        </style>
+
+        <style name="AppSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+                <item name="android:textAppearance">@style/AppTextAppearanceSpinnerItem</item>
+        </style>
+
+        <style name="AppTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+                <item name="android:textColor">@android:color/white</item>
+                <item name="android:fontFamily">sans-serif-light</item>
+        </style>
+
+</resources>
