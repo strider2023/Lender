@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this, ProfileSettingsActivity.class));
                 break;
             case R.id.nav_contact:
+                startActivity(new Intent(MainActivity.this, ContactActivity.class));
                 break;
             case R.id.nav_logout:
                 appPreferences.setLoggedOut();
