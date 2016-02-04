@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.maybrightventures.lender.EducationInfoActivity;
 import com.maybrightventures.lender.R;
 import com.maybrightventures.lender.WorkInfoActivity;
 

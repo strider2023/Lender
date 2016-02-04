@@ -1,20 +1,17 @@
 package com.maybrightventures.lender;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.maybrightventures.lender.dao.PagerFragment;
 import com.maybrightventures.lender.fragments.EducationInfoFragment;
 import com.maybrightventures.lender.adapters.AppPagerAdapter;
-import com.maybrightventures.lender.fragments.ProfileActivityFragment;
+import com.maybrightventures.lender.fragments.ProfileFragment;
 import com.maybrightventures.lender.fragments.WorkInfoFragment;
 import com.maybrightventures.lender.util.AppPreferences;
 
@@ -30,16 +27,18 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_translate);
         setContentView(R.layout.activity_profile_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pagerFragments.add(new PagerFragment(ProfileActivityFragment.newInstance(1), "Basic Info"));
+        pagerFragments.add(new PagerFragment(ProfileFragment.newInstance(1), "Basic Info"));
         pagerFragments.add(new PagerFragment(EducationInfoFragment.newInstance(1), "Education"));
         pagerFragments.add(new PagerFragment(WorkInfoFragment.newInstance(1), "Work"));
 
         appPreferences = new AppPreferences(this);
-        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager(), pagerFragments);
+        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());
+        appPagerAdapter.setData(pagerFragments);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(appPagerAdapter);
@@ -49,26 +48,15 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_sign_up, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.nav_signup_done:
-                appPreferences.setLoggedIn();
-                startActivity(new Intent(this, AppIntroActivity.class));
+            case android.R.id.home:
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
 }

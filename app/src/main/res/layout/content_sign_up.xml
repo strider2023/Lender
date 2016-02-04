@@ -76,13 +76,14 @@
             android:textColor="@color/colorBaseDark" />
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/sign_up_facebook_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/selector_main_btn"
+            android:background="#3b5998"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/facebook_connect"
-            android:textColor="@color/colorBaseDark" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </ScrollView>

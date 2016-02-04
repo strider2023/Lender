@@ -12,6 +12,7 @@ public class WorkInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_translate);
         setContentView(R.layout.activity_work_info);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

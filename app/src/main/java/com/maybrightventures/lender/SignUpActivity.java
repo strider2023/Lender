@@ -27,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_translate);
         setContentView(R.layout.activity_sign_up);
 
         selectDateFragment = new SelectDateFragment();
@@ -50,8 +51,8 @@ public class SignUpActivity extends AppCompatActivity {
         profileCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                appPreferences.setLoggedIn();
                 startActivity(new Intent(SignUpActivity.this, AppIntroActivity.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });

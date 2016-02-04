@@ -22,6 +22,7 @@ public class MobileOTPActivity extends AppCompatActivity implements TextWatcher 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_translate);
         setContentView(R.layout.activity_mobile_otp);
 
         verfiyOTP = (Button) findViewById(R.id.otp_verfiy_button);
@@ -34,7 +35,6 @@ public class MobileOTPActivity extends AppCompatActivity implements TextWatcher 
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MobileOTPActivity.this, SignUpActivity.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });

@@ -29,7 +29,6 @@ public class AppPreferences {
         }
         edit.putString("userEmail", email);
         edit.putString("userPhone", phone);
-        edit.putString("userPassword", password);
         edit.commit();
     }
 
@@ -53,10 +52,6 @@ public class AppPreferences {
         return mAppPrefs.getString("userPhone", null);
     }
 
-    public String getUserPassword() {
-        return mAppPrefs.getString("userPassword", null);
-    }
-
     public void setLoggedIn() {
         SharedPreferences.Editor edit = mAppPrefs.edit();
         edit.putBoolean("appLoggedIn", true);
@@ -66,6 +61,11 @@ public class AppPreferences {
     public void setLoggedOut() {
         SharedPreferences.Editor edit = mAppPrefs.edit();
         edit.putBoolean("appLoggedIn", false);
+        edit.putString("userFirstName", null);
+        edit.putString("userMiddleName", null);
+        edit.putString("userLastName", null);
+        edit.putString("userEmail", null);
+        edit.putString("userPhone", null);
         edit.commit();
     }
 

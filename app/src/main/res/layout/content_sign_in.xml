@@ -9,6 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/sign_in_email"
         style="@style/SplashEdditext"
@@ -18,10 +23,17 @@
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress" />
 
+    </android.support.design.widget.TextInputLayout>
+
     <View
         android:layout_width="@dimen/splash_divider_width"
         android:layout_height="2dp"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"
+        android:layout_margin="10dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/sign_in_password"
@@ -31,6 +43,8 @@
         android:hint="@string/password"
         android:imeOptions="actionDone"
         android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/sign_in_button"
