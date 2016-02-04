@@ -43,19 +43,19 @@ public class LoanDetailsRecyclerAdapter extends RecyclerView.Adapter<LoanDetails
             switch (repaymentDAOs.get(position).getStatus()) {
                 case OPEN:
                     holder.status.setText(LoanStatus.OPEN.toString());
-                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_24dp, 0 , 0 , 0);
+                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_18dp, 0 , 0 , 0);
                     break;
                 case CLOSED:
                     holder.status.setText(LoanStatus.CLOSED.toString());
-                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_24dp, 0, 0, 0);
+                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_18dp, 0, 0, 0);
                     break;
                 case RECEIVED:
                     holder.status.setText(LoanStatus.RECEIVED.toString());
-                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_all_white_24dp, 0, 0, 0);
+                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_all_white_18dp, 0, 0, 0);
                     break;
                 case PENDING:
                     holder.status.setText(LoanStatus.PENDING.toString());
-                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_24dp, 0, 0, 0);
+                    holder.status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_outline_white_18dp, 0, 0, 0);
                     break;
             }
         }
