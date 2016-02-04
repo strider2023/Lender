@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -12,6 +11,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@drawable/ic_account_circle_black_48dp"
+        android:tint="@color/colorPrimary"
         android:layout_margin="5dp"/>
 
     <LinearLayout
@@ -35,15 +35,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/lend_list_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:text="₹1500"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="42sp" />
-
-        <TextView
             android:id="@+id/lend_list_tenure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,14 +56,13 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/lend_list_accept"
+    <TextView
+        android:id="@+id/lend_list_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_accept"
-        app:elevation="6dp"
-        app:fabSize="mini"
-        app:pressedTranslationZ="12dp"
-        app:rippleColor="@color/colorBase" />
+        android:fontFamily="sans-serif-light"
+        android:text="₹1500"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="36sp" />
 
 </LinearLayout>

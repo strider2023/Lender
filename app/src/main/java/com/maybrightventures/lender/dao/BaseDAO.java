@@ -28,8 +28,8 @@ public abstract class BaseDAO {
         this.context = context;
         this.today = new Date();
         this.dateOfTheMonth = new SimpleDateFormat("dd");
-        this.dateFormat = new SimpleDateFormat("E, MMM dd yy");
-        this.amountFormatter = new DecimalFormat(context.getString(R.string.rupee) + "##,##,###.##");
+        this.dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        this.amountFormatter = new DecimalFormat("##,##,###.##");
     }
 
     protected abstract void parse(JSONParser jsonParser, JSONObject jsonObject);
@@ -63,5 +63,9 @@ public abstract class BaseDAO {
 
     public SimpleDateFormat getDateOfTheMonth() {
         return dateOfTheMonth;
+    }
+
+    public SimpleDateFormat getDateFormat() {
+        return dateFormat;
     }
 }

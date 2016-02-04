@@ -49,7 +49,7 @@ public class CalendarEventDAO extends BaseDAO {
     }
 
     public String getAmount() {
-        return getAmountFormatter().format(amount);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(amount);
     }
 
     public void setAmount(Float amount) {

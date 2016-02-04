@@ -29,6 +29,7 @@ public class LendLoaderTask extends AsyncTaskLoader<List<LendDAO>> {
     @Override
     public List<LendDAO> loadInBackground() {
         if(networkUtils.isNetworkAvailable()) {
+            lendDAOList.clear();
             lendDAOList.add(new LendDAO("Arindam Nath", 1500, "3 Months", "3 mins ago"));
             lendDAOList.add(new LendDAO("Samarjit Choudhury", 2000, "2 Months", "30 mins ago"));
             lendDAOList.add(new LendDAO("Gaurav Jalan", 500, "1 Months", "31 Dec 2015"));

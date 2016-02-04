@@ -1,84 +1,62 @@
 package com.maybrightventures.lender;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.maybrightventures.lender.adapters.RepaymentListBaseAdapter;
+import com.maybrightventures.lender.adapters.LoanDetailsRecyclerAdapter;
 import com.maybrightventures.lender.dao.LoanDetailsDAO;
 import com.maybrightventures.lender.dao.RepaymentDAO;
+import com.maybrightventures.lender.dao.enums.LoaderID;
+import com.maybrightventures.lender.threads.LoanDetailLoaderTask;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by arindamnath on 13/01/16.
  */
-public class LoanDetailsActivity extends AppCompatActivity {
+public class LoanDetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<LoanDetailsDAO> {
 
-    private View listHead;
-    private RepaymentListBaseAdapter repaymentListBaseAdapter;
-    private List<RepaymentDAO> repaymentDAOList = new ArrayList<>();
-    private ListView listView;
-    private LayoutInflater layoutInflater;
+    private LoanDetailsRecyclerAdapter loanDetailsRecyclerAdapter;
+    private RecyclerView listView;
+    private ProgressDialog progressDialog;
+    private Bundle queryData;
 
     private TextView borrowerName, lenderName, borrowerPendingAmt, lenderPendingAmt,
             loanAmt, status, loanTenure, issuedDate;
-
-    private LoanDetailsDAO loanDetailsDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_translate);
         setContentView(R.layout.activity_loan_details);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setSubtitle("Loan Id: 132DFJA789F");
 
-        repaymentListBaseAdapter = new RepaymentListBaseAdapter(this);
-        repaymentDAOList.add(new RepaymentDAO("14 Jan 2016", "1 of 3", 150, "Received"));
-        repaymentDAOList.add(new RepaymentDAO("14 Feb 2016", "2 of 3", 150, "Pending"));
-        repaymentDAOList.add(new RepaymentDAO("14 Mar 2016", "3 of 3", 150, "Pending"));
+        loanDetailsRecyclerAdapter = new LoanDetailsRecyclerAdapter();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Content...");
 
-        loanDetailsDAO = new LoanDetailsDAO(this);
-        loanDetailsDAO.setBorrowerName("Arindam Nath");
-        loanDetailsDAO.setLenderName("Maitri Nath");
-        loanDetailsDAO.setBorrowerPendingAmt(700.35f);
-        loanDetailsDAO.setLenderPendingAmt(500);
-        loanDetailsDAO.setLoanAmt(1200);
-        loanDetailsDAO.setStatus("Active");
-        loanDetailsDAO.setLoanTenure("3 Months");
-        loanDetailsDAO.setIssuedDate("5 Jan 2016");
-        loanDetailsDAO.setRepaymentDAO(repaymentDAOList);
-
-        layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        listHead = layoutInflater.inflate(R.layout.content_loan_details_header, null);
-        listView = (ListView) findViewById(R.id.loan_details_list);
-        borrowerName = (TextView) listHead.findViewById(R.id.loan_details_borrower);
-        lenderName = (TextView) listHead.findViewById(R.id.loan_details_lender);
-        borrowerPendingAmt = (TextView) listHead.findViewById(R.id.loan_details_pending_amount_borrower);
-        lenderPendingAmt = (TextView) listHead.findViewById(R.id.loan_details_pending_amount_lender);
-        loanAmt = (TextView) listHead.findViewById(R.id.loan_details_total_amount);
-        status = (TextView) listHead.findViewById(R.id.loan_details_status);
-        loanTenure = (TextView) listHead.findViewById(R.id.loan_details_tenure);
-        issuedDate = (TextView) listHead.findViewById(R.id.loan_details_issue_date);
-
-        borrowerName.setText(loanDetailsDAO.getBorrowerName());
-        lenderName.setText(loanDetailsDAO.getLenderName());
-        borrowerPendingAmt.setText(loanDetailsDAO.getBorrowerPendingAmt());
-        lenderPendingAmt.setText(loanDetailsDAO.getLenderPendingAmt());
-        loanAmt.setText(loanDetailsDAO.getLoanAmt());
-        status.setText(loanDetailsDAO.getStatus());
-        loanTenure.setText(loanDetailsDAO.getLoanTenure());
-        issuedDate.setText(loanDetailsDAO.getIssuedDate());
-        repaymentListBaseAdapter.setData(loanDetailsDAO.getRepaymentDAO());
+        listView = (RecyclerView) findViewById(R.id.loan_details_list);
+        borrowerName = (TextView) findViewById(R.id.loan_details_borrower);
+        lenderName = (TextView) findViewById(R.id.loan_details_lender);
+        borrowerPendingAmt = (TextView) findViewById(R.id.loan_details_pending_amount_borrower);
+        lenderPendingAmt = (TextView) findViewById(R.id.loan_details_pending_amount_lender);
+        loanAmt = (TextView) findViewById(R.id.loan_details_total_amount);
+        status = (TextView) findViewById(R.id.loan_details_status);
+        loanTenure = (TextView) findViewById(R.id.loan_details_tenure);
+        issuedDate = (TextView) findViewById(R.id.loan_details_issue_date);
 
         borrowerName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +72,13 @@ public class LoanDetailsActivity extends AppCompatActivity {
             }
         });
 
-        listView.setAdapter(repaymentListBaseAdapter);
-        listView.addHeaderView(listHead);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        listView.setAdapter(loanDetailsRecyclerAdapter);
+
+        queryData = new Bundle();
+        queryData.putString("query", "");
+        getSupportLoaderManager().initLoader(LoaderID.REPAYMENT_DUE.getValue(), queryData, this).forceLoad();
+        progressDialog.show();
     }
 
     @Override
@@ -107,5 +90,35 @@ public class LoanDetailsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Loader<LoanDetailsDAO> onCreateLoader(int id, Bundle args) {
+        progressDialog.show();
+        return new LoanDetailLoaderTask(this, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<LoanDetailsDAO> loader, LoanDetailsDAO data) {
+        progressDialog.dismiss();
+        if(data != null) {
+            getSupportActionBar().setSubtitle(data.getLoanId());
+            borrowerName.setText(data.getBorrowerName());
+            lenderName.setText(data.getLenderName());
+            borrowerPendingAmt.setText(data.getBorrowerPendingAmt());
+            lenderPendingAmt.setText(data.getLenderPendingAmt());
+            loanAmt.setText(data.getLoanAmt());
+            status.setText(data.getStatus());
+            loanTenure.setText(data.getLoanTenure());
+            issuedDate.setText(data.getIssuedDate());
+            loanDetailsRecyclerAdapter.setData(data.getRepaymentDAO());
+        } else {
+            loanDetailsRecyclerAdapter.setData(new ArrayList<RepaymentDAO>());
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<LoanDetailsDAO> loader) {
+
     }
 }

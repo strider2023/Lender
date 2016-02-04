@@ -32,6 +32,7 @@ public class EventsLoaderTask extends AsyncTaskLoader<DashboardDAO> {
     public DashboardDAO loadInBackground() {
         if(networkUtils.isNetworkAvailable()) {
             this.dashboardDAO = new DashboardDAO(getContext());
+            this.calendarEventDAOs.clear();
             dashboardDAO.setTotalAmount(1200.0f);
             dashboardDAO.setBorrowed(700.0f);
             dashboardDAO.setLent(500.0f);

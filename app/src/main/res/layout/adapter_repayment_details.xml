@@ -13,28 +13,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/repayment_details_status_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:layout_marginTop="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textAllCaps="true"
-            android:background="@drawable/shape_base_dark"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            android:visibility="gone"/>
-
-        <TextView
             android:id="@+id/repayment_details_date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-light"
             android:gravity="center_vertical"
-            android:layout_marginTop="5dp"
             android:text="01-12-2015"
-            android:textColor="@color/colorBase"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp" />
 
         <LinearLayout
@@ -45,12 +30,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:paddingBottom="5dp"
                 android:text="@string/installment_number"
                 android:textAllCaps="true"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,26 +41,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:text="3 of 4"
                 android:textAllCaps="true"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/repayment_details_amount_text"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:padding="5dp"
-        android:text="₹500"
-        android:textColor="@color/colorBase"
-        android:textSize="44sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/repayment_details_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textAllCaps="true"
+            android:paddingRight="10dp"
+            android:paddingLeft="1dp"
+            android:drawablePadding="2dp"
+            android:background="@drawable/shape_base_dark"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/repayment_details_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="₹500"
+            android:textColor="@color/colorBase"
+            android:textSize="44sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -8,62 +8,89 @@
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        card_view:cardBackgroundColor="@color/colorBase"
         card_view:cardCornerRadius="3dp"
         card_view:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
+            android:layout_margin="10dp">
 
-            <TextView
+            <ImageView
+                android:id="@+id/content_borrow_edit_quote_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/select_amount"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_create_black_24dp"
+                android:tint="@android:color/white"
+                android:padding="10dp"
+                android:background="@drawable/shape_oval_color_primary"/>
 
-            <Spinner
-                style="@style/AppSpinnerItem"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:entries="@array/money_temp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/select_tenure"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Loan Amount"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
-            <Spinner
-                style="@style/AppSpinnerItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:entries="@array/months_temp" />
+                <TextView
+                    android:id="@+id/content_borrow_requested_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/na"
+                    android:textColor="@color/colorBase"
+                    android:textSize="20sp" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:hint="@string/remarks"
-                android:imeOptions="actionDone"
-                android:inputType="textCapSentences"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Loan Tenure"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/content_borrow_requested_tenure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/na"
+                    android:textColor="@color/colorBase"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Note"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/content_borrow_requested_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/na"
+                    android:textColor="@color/colorBase"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

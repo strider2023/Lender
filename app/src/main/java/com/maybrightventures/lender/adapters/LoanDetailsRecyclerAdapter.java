@@ -1,10 +1,9 @@
 package com.maybrightventures.lender.adapters;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.maybrightventures.lender.R;
@@ -15,18 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by arindamnath on 13/01/16.
+ * Created by arindamnath on 04/02/16.
  */
-public class RepaymentListBaseAdapter extends BaseAdapter {
+public class LoanDetailsRecyclerAdapter extends RecyclerView.Adapter<LoanDetailsRecyclerAdapter.MyViewHolder> {
 
-    private Context context;
-    private LayoutInflater layoutInflater;
     private List<RepaymentDAO> repaymentDAOs = new ArrayList<>();
 
-    public RepaymentListBaseAdapter(Context contenxt) {
-        this.context = contenxt;
-        layoutInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public LoanDetailsRecyclerAdapter() {
+
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_repayment_details,
+                viewGroup, false);
+        return new MyViewHolder(view);
     }
 
     public void setData(List<RepaymentDAO> data) {
@@ -35,35 +37,7 @@ public class RepaymentListBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return repaymentDAOs.size();
-    }
-
-    @Override
-    public RepaymentDAO getItem(int position) {
-        return repaymentDAOs.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.adapter_repayment_details, parent, false);
-            holder.status = (TextView) convertView.findViewById(R.id.repayment_details_status_text);
-            holder.date = (TextView) convertView.findViewById(R.id.repayment_details_date_text);
-            holder.loanId = (TextView) convertView.findViewById(R.id.repayment_details_loan_id_text);
-            holder.amount = (TextView) convertView.findViewById(R.id.repayment_details_amount_text);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         if(repaymentDAOs.get(position).getStatus() != null) {
             holder.status.setVisibility(View.VISIBLE);
             switch (repaymentDAOs.get(position).getStatus()) {
@@ -87,11 +61,25 @@ public class RepaymentListBaseAdapter extends BaseAdapter {
         }
         holder.date.setText(repaymentDAOs.get(position).getDate());
         holder.loanId.setText(repaymentDAOs.get(position).getTenure());
-        holder.amount.setText(context.getText(R.string.rupee) + repaymentDAOs.get(position).getAmount());
-        return convertView;
+        holder.amount.setText(repaymentDAOs.get(position).getAmount());
     }
 
-    static class ViewHolder {
-        TextView date, loanId, amount, status;
+    @Override
+    public int getItemCount() {
+        return repaymentDAOs == null ? 0 : repaymentDAOs.size();
     }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView date, loanId, amount, status;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            status = (TextView) itemView.findViewById(R.id.repayment_details_status_text);
+            date = (TextView) itemView.findViewById(R.id.repayment_details_date_text);
+            loanId = (TextView) itemView.findViewById(R.id.repayment_details_loan_id_text);
+            amount = (TextView) itemView.findViewById(R.id.repayment_details_amount_text);
+        }
+    }
+
 }

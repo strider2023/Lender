@@ -12,6 +12,7 @@ import com.maybrightventures.lender.dao.PagerFragment;
 import com.maybrightventures.lender.fragments.EducationInfoFragment;
 import com.maybrightventures.lender.adapters.AppPagerAdapter;
 import com.maybrightventures.lender.fragments.ProfileFragment;
+import com.maybrightventures.lender.fragments.UserKYCFragment;
 import com.maybrightventures.lender.fragments.WorkInfoFragment;
 import com.maybrightventures.lender.util.AppPreferences;
 
@@ -31,10 +32,12 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pagerFragments.add(new PagerFragment(ProfileFragment.newInstance(1), "Basic Info"));
         pagerFragments.add(new PagerFragment(EducationInfoFragment.newInstance(1), "Education"));
         pagerFragments.add(new PagerFragment(WorkInfoFragment.newInstance(1), "Work"));
+        pagerFragments.add(new PagerFragment(UserKYCFragment.newInstance(1), "KYC"));
 
         appPreferences = new AppPreferences(this);
         appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());

@@ -1,11 +1,17 @@
 package com.maybrightventures.lender.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.maybrightventures.lender.R;
 import com.maybrightventures.lender.adapters.RepaymentListBaseAdapter;
@@ -19,13 +25,16 @@ import java.util.List;
  */
 public class BorrowFragment extends Fragment {
 
-    private View listHead;
-    private View mViewHolder;
+    private View listHead, listFooter;
+    private View mViewHolder, selectorContainer, quoteContainer;
     private RepaymentListBaseAdapter repaymentListBaseAdapter;
     private List<RepaymentDAO> repaymentDAOList = new ArrayList<>();
+    private Spinner amountSpinner, timeSpinner;
+    private EditText noteEditText;
+    private TextView amount, tenure, note;
     private ListView borrowDetails;
 
-    public static BorrowFragment newInstance(int sectionNumber) {
+    public static BorrowFragment newInstance() {
         BorrowFragment fragment = new BorrowFragment();
         return fragment;
     }
@@ -34,17 +43,111 @@ public class BorrowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         repaymentListBaseAdapter = new RepaymentListBaseAdapter(getActivity());
-        repaymentDAOList.add(new RepaymentDAO("14 Jan 2016", "1 of 3", 150, null));
-        repaymentDAOList.add(new RepaymentDAO("14 Feb 2016", "2 of 3", 150, null));
-        repaymentDAOList.add(new RepaymentDAO("14 Mar 2016", "3 of 3", 150, null));
+        RepaymentDAO repaymentDAO = new RepaymentDAO(getActivity());
+        repaymentDAO.setId(1l);
+        repaymentDAO.setAmount(150);
+        repaymentDAO.setDate(System.currentTimeMillis());
+        repaymentDAO.setTenure("1 of 1");
+        repaymentDAOList.add(repaymentDAO);
+        repaymentDAOList.add(repaymentDAO);
+        repaymentDAOList.add(repaymentDAO);
         repaymentListBaseAdapter.setData(repaymentDAOList);
 
         mViewHolder = inflater.inflate(R.layout.fragment_borrow, container, false);
-        borrowDetails = (ListView) mViewHolder.findViewById(R.id.content_borrow_repayment_list);
+        selectorContainer = mViewHolder.findViewById(R.id.borrow_selector_container);
+        quoteContainer = mViewHolder.findViewById(R.id.borrow_quote_container);
         listHead = inflater.inflate(R.layout.content_borrow_header, null);
+        listFooter = inflater.inflate(R.layout.content_payment_footer, null);
+
+        borrowDetails = (ListView) mViewHolder.findViewById(R.id.borrow_repayment_list);
+        amountSpinner = (Spinner) mViewHolder.findViewById(R.id.borrow_amount);
+        timeSpinner = (Spinner) mViewHolder.findViewById(R.id.borrow_teneure);
+        noteEditText = (EditText) mViewHolder.findViewById(R.id.borrow_user_note);
+        amount = (TextView) listHead.findViewById(R.id.content_borrow_requested_amount);
+        tenure = (TextView) listHead.findViewById(R.id.content_borrow_requested_tenure);
+        note = (TextView) listHead.findViewById(R.id.content_borrow_requested_note);
+
+        mViewHolder.findViewById(R.id.borrow_get_quote_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutToggle(false);
+                amount.setText(amountSpinner.getSelectedItem().toString() + " @ 14%");
+                tenure.setText(timeSpinner.getSelectedItem().toString());
+                if (noteEditText.getText().toString().trim().length() > 0) {
+                    note.setText(noteEditText.getText().toString().trim());
+                } else {
+                    note.setText(R.string.na);
+                }
+            }
+        });
+
+        listHead.findViewById(R.id.content_borrow_edit_quote_btn)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutToggle(true);
+                        noteEditText.getText().clear();
+                    }
+                });
+
+        mViewHolder.findViewById(R.id.borrow_submit_loan_request)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutToggle(true);
+                        noteEditText.getText().clear();
+                        Snackbar.make(v, "Your loan request is now active.", Snackbar.LENGTH_LONG)
+                                .setAction("UNDO", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Snackbar.make(v, "Your loan loan request has been cancelled.", Snackbar.LENGTH_LONG).show();
+                                    }
+                                })
+                                .show();
+                    }
+                });
 
         borrowDetails.setAdapter(repaymentListBaseAdapter);
         borrowDetails.addHeaderView(listHead);
+        borrowDetails.addFooterView(listFooter);
         return mViewHolder;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        layoutToggle(true);
+    }
+
+    private void layoutToggle(boolean isSelectorLayout) {
+        if(isSelectorLayout) {
+            selectorContainer.animate()
+                    .setDuration(500)
+                    .translationY(0);
+            quoteContainer.animate()
+                    .setDuration(750)
+                    .translationY(quoteContainer.getHeight())
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            quoteContainer.setVisibility(View.GONE);
+                        }
+                    });
+        } else {
+            selectorContainer.animate()
+                    .setDuration(500)
+                    .translationY(-selectorContainer.getHeight());
+            quoteContainer.animate()
+                    .setDuration(750)
+                    .translationY(0)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            super.onAnimationStart(animation);
+                            quoteContainer.setVisibility(View.VISIBLE);
+                        }
+                    });
+        }
     }
 }

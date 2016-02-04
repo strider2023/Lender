@@ -2,6 +2,8 @@ package com.maybrightventures.lender.dao;
 
 import android.content.Context;
 
+import com.maybrightventures.lender.R;
+
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class LoanDetailsDAO extends BaseDAO {
 
     private Context context;
+    private String loanId;
     private String borrowerName;
     private String lenderName;
     private float borrowerPendingAmt;
@@ -51,7 +54,7 @@ public class LoanDetailsDAO extends BaseDAO {
     }
 
     public String getBorrowerPendingAmt() {
-        return getAmountFormatter().format(borrowerPendingAmt);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(borrowerPendingAmt);
     }
 
     public void setBorrowerPendingAmt(float borrowerPendingAmt) {
@@ -59,7 +62,7 @@ public class LoanDetailsDAO extends BaseDAO {
     }
 
     public String getLenderPendingAmt() {
-        return getAmountFormatter().format(lenderPendingAmt);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(lenderPendingAmt);
     }
 
     public void setLenderPendingAmt(float lenderPendingAmt) {
@@ -67,7 +70,7 @@ public class LoanDetailsDAO extends BaseDAO {
     }
 
     public String getLoanAmt() {
-        return getAmountFormatter().format(loanAmt);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(loanAmt);
     }
 
     public void setLoanAmt(float loanAmt) {
@@ -104,5 +107,13 @@ public class LoanDetailsDAO extends BaseDAO {
 
     public void setRepaymentDAO(List<RepaymentDAO> repaymentDAO) {
         this.repaymentDAO = repaymentDAO;
+    }
+
+    public String getLoanId() {
+        return "Ref Id: " + loanId;
+    }
+
+    public void setLoanId(String loanId) {
+        this.loanId = loanId;
     }
 }

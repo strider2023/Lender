@@ -25,7 +25,7 @@ public class DashboardDAO extends BaseDAO {
     }
 
     public String getTotalAmount() {
-        return getAmountFormatter().format(totalAmount);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(totalAmount);
     }
 
     public void setTotalAmount(Float totalAmount) {
@@ -33,7 +33,7 @@ public class DashboardDAO extends BaseDAO {
     }
 
     public String getBorrowed() {
-        return getAmountFormatter().format(borrowed);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(borrowed);
     }
 
     public void setBorrowed(Float borrowed) {
@@ -41,7 +41,7 @@ public class DashboardDAO extends BaseDAO {
     }
 
     public String getLent() {
-        return getAmountFormatter().format(lent);
+        return getContext().getString(R.string.rupee) + getAmountFormatter().format(lent);
     }
 
     public void setLent(Float lent) {

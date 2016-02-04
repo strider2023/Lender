@@ -125,6 +125,7 @@ public class DashboardFragment extends Fragment implements LoaderManager.LoaderC
     public void onLoadFinished(Loader<DashboardDAO> loader, DashboardDAO data) {
         progressDialog.dismiss();
         if(data != null) {
+            transactionAmount.setText(data.getTotalAmount());
             creditAmount.setText(data.getLent());
             debitAmount.setText(data.getBorrowed());
             eventsListBaseAdapter.setData(data.getCalendarEventDAOArrayList());
