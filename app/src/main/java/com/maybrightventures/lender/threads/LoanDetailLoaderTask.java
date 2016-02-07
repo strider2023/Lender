@@ -48,7 +48,7 @@ public class LoanDetailLoaderTask extends AsyncTaskLoader<LoanDetailsDAO> {
             RepaymentDAO repaymentDAO = new RepaymentDAO(getContext());
             repaymentDAO.setId(1l);
             repaymentDAO.setAmount(150);
-            repaymentDAO.setDate(System.currentTimeMillis());
+            repaymentDAO.setDate(1452081252000l);
             repaymentDAO.setTenure("1 of 2");
             repaymentDAO.setStatus(LoanStatus.RECEIVED);
 

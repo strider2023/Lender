@@ -41,28 +41,14 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <fragment
-            android:id="@+id/main_content_borrow"
-            android:name="com.maybrightventures.lender.fragments.BorrowFragment"
+        <FrameLayout
+            android:id="@+id/main_fragment_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:layout="@layout/fragment_borrow" />
-
-        <fragment
-            android:id="@+id/main_content_manage_wallet"
-            android:name="com.maybrightventures.lender.fragments.WalletFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:layout="@layout/fragment_wallet" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="gone"/>
 
     </LinearLayout>
-
-    <!--<include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

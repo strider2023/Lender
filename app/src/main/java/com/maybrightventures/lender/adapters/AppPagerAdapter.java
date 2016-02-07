@@ -15,9 +15,11 @@ import java.util.List;
 public class AppPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<PagerFragment> pagerFragments = new ArrayList<>();
+    private boolean showText = true;
 
-    public AppPagerAdapter(FragmentManager fm) {
+    public AppPagerAdapter(FragmentManager fm, boolean showText) {
         super(fm);
+        this.showText = showText;
     }
 
     public void setData(List<PagerFragment> pagerFragments) {
@@ -37,6 +39,10 @@ public class AppPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return pagerFragments.get(position).getName();
+        if(showText) {
+            return pagerFragments.get(position).getName();
+        } else {
+            return null;
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -30,13 +32,19 @@ public class BorrowFragment extends Fragment {
     private RepaymentListBaseAdapter repaymentListBaseAdapter;
     private List<RepaymentDAO> repaymentDAOList = new ArrayList<>();
     private Spinner amountSpinner, timeSpinner;
-    private EditText noteEditText;
-    private TextView amount, tenure, note;
+    private EditText noteEditText, codeEditText;
+    private TextView amount, tenure, note, referralCode;
     private ListView borrowDetails;
 
     public static BorrowFragment newInstance() {
         BorrowFragment fragment = new BorrowFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
     }
 
     @Override
@@ -63,9 +71,11 @@ public class BorrowFragment extends Fragment {
         amountSpinner = (Spinner) mViewHolder.findViewById(R.id.borrow_amount);
         timeSpinner = (Spinner) mViewHolder.findViewById(R.id.borrow_teneure);
         noteEditText = (EditText) mViewHolder.findViewById(R.id.borrow_user_note);
+        codeEditText = (EditText) mViewHolder.findViewById(R.id.borrow_user_referral_code);
         amount = (TextView) listHead.findViewById(R.id.content_borrow_requested_amount);
         tenure = (TextView) listHead.findViewById(R.id.content_borrow_requested_tenure);
         note = (TextView) listHead.findViewById(R.id.content_borrow_requested_note);
+        referralCode = (TextView) listHead.findViewById(R.id.content_borrow_requested_referral_code);
 
         mViewHolder.findViewById(R.id.borrow_get_quote_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +87,11 @@ public class BorrowFragment extends Fragment {
                     note.setText(noteEditText.getText().toString().trim());
                 } else {
                     note.setText(R.string.na);
+                }
+                if (codeEditText.getText().toString().trim().length() > 0) {
+                    referralCode.setText(codeEditText.getText().toString().trim());
+                } else {
+                    referralCode.setText(R.string.na);
                 }
             }
         });

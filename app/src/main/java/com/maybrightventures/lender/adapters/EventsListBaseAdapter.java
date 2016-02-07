@@ -18,9 +18,12 @@ import java.util.List;
  */
 public class EventsListBaseAdapter extends BaseAdapter {
 
+    private static final int TYPE_EVENT = 0;
+    private static final int TYPE_DIVIDER = 1;
+
     private Context context;
     private LayoutInflater layoutInflater;
-    private List<CalendarEventDAO> calendarEventDAOs = new ArrayList<>();
+    private List<Object> calendarEventDAOs = new ArrayList<>();
 
     public EventsListBaseAdapter(Context context) {
         this.context = context;
@@ -28,7 +31,7 @@ public class EventsListBaseAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setData(List<CalendarEventDAO> data) {
+    public void setData(List<Object> data) {
         calendarEventDAOs = data;
         notifyDataSetChanged();
     }
@@ -39,7 +42,7 @@ public class EventsListBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public CalendarEventDAO getItem(int position) {
+    public Object getItem(int position) {
         return calendarEventDAOs.get(position);
     }
 
@@ -49,28 +52,66 @@ public class EventsListBaseAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (getItem(position) instanceof CalendarEventDAO) {
+            return TYPE_EVENT;
+        }
+
+        return TYPE_DIVIDER;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return (getItemViewType(position) == TYPE_EVENT);
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int type = getItemViewType(position);
         final ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.adapter_dashboard_events, parent, false);
-            holder.date = (TextView) convertView.findViewById(R.id.adapter_dashboard_repayment_date_text);
-            holder.loanId = (TextView) convertView.findViewById(R.id.adapter_dashboard_loan_id);
-            holder.amount = (TextView) convertView.findViewById(R.id.adapter_dashboard_repayment_value);
-            holder.dateOfMonth = (TextView) convertView.findViewById(R.id.adapter_dashboard_loan_date);
+            switch (type) {
+                case TYPE_EVENT:
+                    convertView = layoutInflater.inflate(R.layout.adapter_dashboard_events, parent, false);
+                    holder.date = (TextView) convertView.findViewById(R.id.adapter_dashboard_repayment_date_text);
+                    holder.loanId = (TextView) convertView.findViewById(R.id.adapter_dashboard_loan_id);
+                    holder.amount = (TextView) convertView.findViewById(R.id.adapter_dashboard_repayment_value);
+                    holder.dateOfMonth = (TextView) convertView.findViewById(R.id.adapter_dashboard_loan_date);
+                    break;
+                case TYPE_DIVIDER:
+                    convertView = layoutInflater.inflate(R.layout.content_dashboard_header, parent, false);
+                    holder.header = (TextView) convertView.findViewById(R.id.dashboard_header_text);
+                    break;
+            }
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.date.setText(calendarEventDAOs.get(position).getDate());
-        holder.loanId.setText(calendarEventDAOs.get(position).getLoanID());
-        holder.amount.setText(calendarEventDAOs.get(position).getAmount());
-        holder.dateOfMonth.setText(calendarEventDAOs.get(position).getDateOfMonth());
+        switch (type) {
+            case TYPE_EVENT:
+                CalendarEventDAO calendarEventDAO = (CalendarEventDAO)getItem(position);
+                holder.date.setText(calendarEventDAO.getDate());
+                holder.loanId.setText(calendarEventDAO.getLoanID());
+                holder.amount.setText(calendarEventDAO.getAmount());
+                holder.dateOfMonth.setText(calendarEventDAO.getDateOfMonth());
+                break;
+            case TYPE_DIVIDER:
+                String titleString = (String)getItem(position);
+                holder.header.setText(titleString);
+                break;
+        }
+
         return convertView;
     }
 
     static class ViewHolder {
-        TextView date, loanId, amount, dateOfMonth;
+        TextView header, date, loanId, amount, dateOfMonth;
     }
 }

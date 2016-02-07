@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.maybrightventures.lender.LoanDetailsActivity;
@@ -33,7 +35,7 @@ public class LendFragment extends Fragment implements LoaderManager.LoaderCallba
     private View mViewHolder;
     private LendListBaseAdapter lendListBaseAdapter;
     private ListView listView;
-    private LinearLayout filterOptions;
+    private CardView filterOptions;
 
     public static LendFragment newInstance() {
         LendFragment fragment = new LendFragment();
@@ -41,13 +43,18 @@ public class LendFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         lendListBaseAdapter = new LendListBaseAdapter(getActivity());
-
         mViewHolder = inflater.inflate(R.layout.fragment_lend, container, false);
         listView = (ListView) mViewHolder.findViewById(R.id.lend_request_list);
-        filterOptions = (LinearLayout) mViewHolder.findViewById(R.id.lend_filter_option_container);
+        filterOptions = (CardView) mViewHolder.findViewById(R.id.lend_filter_option_container);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,14 +62,6 @@ public class LendFragment extends Fragment implements LoaderManager.LoaderCallba
                 startActivity(new Intent(getActivity(), LoanDetailsActivity.class));
             }
         });
-
-        mViewHolder.findViewById(R.id.lend_filter_options_btn)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        toggleDrawer(true);
-                    }
-                });
 
         mViewHolder.findViewById(R.id.lend_close_filter_options)
                 .setOnClickListener(new View.OnClickListener() {
@@ -73,16 +72,7 @@ public class LendFragment extends Fragment implements LoaderManager.LoaderCallba
                 });
 
         listView.setAdapter(lendListBaseAdapter);
-        filterOptions.animate()
-                .setDuration(0)
-                .translationY(filterOptions.getHeight())
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        filterOptions.setVisibility(View.GONE);
-                    }
-                });
+        toggleDrawer(false);
 
         Bundle data = new Bundle();
         data.putString("query", "");
@@ -134,5 +124,21 @@ public class LendFragment extends Fragment implements LoaderManager.LoaderCallba
                         }
                     });
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_lend_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_lend_filter:
+                toggleDrawer(true);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

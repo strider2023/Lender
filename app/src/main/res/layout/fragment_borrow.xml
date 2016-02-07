@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        card_view:cardBackgroundColor="@color/colorPrimaryDark"
         card_view:cardCornerRadius="3dp"
         card_view:cardUseCompatPadding="true">
 
@@ -26,7 +25,7 @@
                 android:layout_margin="5dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/select_amount"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
 
             <Spinner
@@ -43,7 +42,7 @@
                 android:layout_margin="5dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/select_tenure"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
 
             <Spinner
@@ -63,19 +62,32 @@
                 android:imeOptions="actionDone"
                 android:inputType="textCapSentences"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/colorBaseDark"
+                android:textColorHint="@color/colorBaseDark" />
 
-            <Button
+            <EditText
+                android:id="@+id/borrow_user_referral_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/referral_code"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textColor="@color/colorBaseDark"
+                android:textColorHint="@color/colorBaseDark" />
+
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/borrow_get_quote_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/selector_white_btn"
+                android:background="@drawable/selector_main_btn"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="10dp"
-                android:text="Get Quote"
-                android:textColor="@drawable/selector_white_text_toggle" />
+                android:text="@string/get_quote"
+                android:textColor="@color/colorBaseDark" />
 
         </LinearLayout>
 
@@ -86,7 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:translationY="500dp">
+        android:translationY="500dp"
+        android:visibility="gone">
 
         <ListView
             android:id="@+id/borrow_repayment_list"

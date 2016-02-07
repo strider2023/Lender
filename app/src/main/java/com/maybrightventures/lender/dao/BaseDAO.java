@@ -28,7 +28,7 @@ public abstract class BaseDAO {
         this.context = context;
         this.today = new Date();
         this.dateOfTheMonth = new SimpleDateFormat("dd");
-        this.dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        this.dateFormat = new SimpleDateFormat("E, dd MMM yyyy");
         this.amountFormatter = new DecimalFormat("##,##,###.##");
     }
 
@@ -46,9 +46,9 @@ public abstract class BaseDAO {
         Date date = new Date(millis);
         if(DateUtils.isSameDay(today, date)) {
             return "Today";
-        } else if(DateUtils.isAfterDay(today, date)) {
+        } /*else if(DateUtils.isAfterDay(today, date)) {
             return "Tomorrow";
-        } else {
+        } */else {
             return dateFormat.format(date);
         }
     }

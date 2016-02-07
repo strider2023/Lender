@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Loan Amount"
+                    android:text="@string/loan_amount"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Loan Tenure"
+                    android:text="@string/loan_tenure"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -74,12 +74,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Note"
+                    android:text="@string/note"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/content_borrow_requested_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/na"
+                    android:textColor="@color/colorBase"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/referral_code"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/content_borrow_requested_referral_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -100,7 +118,7 @@
         android:fontFamily="sans-serif-light"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:text="Re-Payment Schedule"
+        android:text="@string/repayment_schedule"
         android:textAllCaps="true"
         android:textSize="24sp" />
 

@@ -24,6 +24,9 @@
     <string name="select_amount">Select Amount</string>
     <string name="select_tenure">Select Tenure</string>
     <string name="loan_details">Loan Details</string>
+    <string name="loan_amount">Loan Amount</string>
+    <string name="loan_tenure">Loan Tenure</string>
+    <string name="note">Note</string>
     <string name="summary">Summary</string>
     <string name="submit_loan_request">Submit Loan Request</string>
     <string name="remarks">Notes (Optional)</string>
@@ -32,6 +35,19 @@
     <string name="repayment_schedule">Repayment Schedule</string>
     <string name="installment_number">Installment No.</string>
     <string name="ref_id">Ref. ID:</string>
+    <string name="referral_code">Referral Code</string>
+    <string name="get_quote">Get Quote</string>
+    <string name="borrower">Borrower</string>
+    <string name="lender">Lender</string>
+    <string name="loan_id">Loan ID</string>
+    <string name="borrower_name_hint">Example: Alok</string>
+    <string name="borrower_location">Borrower Location</string>
+    <string name="borrower_location_hint">Example: Kolkata</string>
+    <string name="age">Age</string>
+    <string name="age_hint">Example: 21</string>
+    <string name="loan_id_hint">Example: AD134ADD12SX</string>
+    <string name="posted_on">Posted On</string>
+    <string name="filter_by">Filter By</string>
     
     <string name="msg_mobile_otp_main">Sit back and relax, while we verify your mobile number.</string>
     <string name="msg_mobile_otp_secondary">Enter the OTP code manually, in case we fail to detect SMS automatically.</string>
@@ -44,6 +60,20 @@
     <string name="screen2_desc">Create your own group and share Snapshots, Videos etc. </string>
     <string name="screen3_title">Synchronize with your laptop</string>
     <string name="screen3_desc">Get notified with your calls and messages to your laptop</string>
+
+    <array name="stat_type">
+        <item>All</item>
+        <item>Lent</item>
+        <item>Borrowed</item>
+    </array>
+
+    <array name="posted_on">
+        <item>All</item>
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>This Week</item>
+        <item>This Month</item>
+    </array>
 
     <array name="issue_type">
         <item>General</item>

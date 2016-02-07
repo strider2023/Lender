@@ -15,12 +15,11 @@ import java.util.Map;
 /**
  * Created by arindamnath on 03/02/16.
  */
-public class EventsLoaderTask extends AsyncTaskLoader<DashboardDAO> {
+public class EventsLoaderTask extends AsyncTaskLoader<List<Object>> {
 
     private NetworkUtils networkUtils;
     private Map<String, Object> params = new HashMap<>();
-    private DashboardDAO dashboardDAO;
-    private List<CalendarEventDAO> calendarEventDAOs = new ArrayList<>();
+    private List<Object> calendarEventDAOs = new ArrayList<>();
 
     public EventsLoaderTask(Context context, Map<String, Object> params) {
         super(context);
@@ -29,28 +28,25 @@ public class EventsLoaderTask extends AsyncTaskLoader<DashboardDAO> {
     }
 
     @Override
-    public DashboardDAO loadInBackground() {
+    public List<Object> loadInBackground() {
         if(networkUtils.isNetworkAvailable()) {
-            this.dashboardDAO = new DashboardDAO(getContext());
             this.calendarEventDAOs.clear();
-            dashboardDAO.setTotalAmount(1200.0f);
-            dashboardDAO.setBorrowed(700.0f);
-            dashboardDAO.setLent(500.0f);
 
             CalendarEventDAO calendarEventDAO = new CalendarEventDAO(getContext());
             calendarEventDAO.setAmount(100.0f);
-            calendarEventDAO.setDate(System.currentTimeMillis());
+            calendarEventDAO.setDate(1452081252000l);
             calendarEventDAO.setLoanID("AJBVA13D123DF");
             calendarEventDAO.setId(1l);
 
+            calendarEventDAOs.add("Upcoming Payments");
             calendarEventDAOs.add(calendarEventDAO);
             calendarEventDAOs.add(calendarEventDAO);
             calendarEventDAOs.add(calendarEventDAO);
+            calendarEventDAOs.add("Upcoming Dues");
             calendarEventDAOs.add(calendarEventDAO);
             calendarEventDAOs.add(calendarEventDAO);
-            dashboardDAO.setCalendarEventDAOArrayList(calendarEventDAOs);
 
-            return this.dashboardDAO;
+            return calendarEventDAOs;
         } else {
             return null;
         }

@@ -3,6 +3,8 @@ package com.maybrightventures.lender.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,9 +17,15 @@ public class WalletFragment extends Fragment {
 
     private View mViewHolder;
 
-    public static WalletFragment newInstance(int sectionNumber) {
+    public static WalletFragment newInstance() {
         WalletFragment fragment = new WalletFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
     }
 
     @Override

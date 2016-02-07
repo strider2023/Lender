@@ -40,7 +40,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         pagerFragments.add(new PagerFragment(UserKYCFragment.newInstance(1), "KYC"));
 
         appPreferences = new AppPreferences(this);
-        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());
+        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager(), true);
         appPagerAdapter.setData(pagerFragments);
 
         mViewPager = (ViewPager) findViewById(R.id.container);

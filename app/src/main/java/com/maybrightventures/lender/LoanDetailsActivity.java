@@ -77,7 +77,7 @@ public class LoanDetailsActivity extends AppCompatActivity implements LoaderMana
 
         queryData = new Bundle();
         queryData.putString("query", "");
-        getSupportLoaderManager().initLoader(LoaderID.REPAYMENT_DUE.getValue(), queryData, this).forceLoad();
+        getSupportLoaderManager().initLoader(LoaderID.TIMELINE.getValue(), queryData, this).forceLoad();
         progressDialog.show();
     }
 

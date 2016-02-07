@@ -10,12 +10,12 @@ import android.view.MenuItem;
 
 import com.maybrightventures.lender.adapters.AppPagerAdapter;
 import com.maybrightventures.lender.dao.PagerFragment;
-import com.maybrightventures.lender.fragments.DashboardFragment;
+import com.maybrightventures.lender.fragments.DashboardEventsFragment;
 import com.maybrightventures.lender.fragments.UserTransactionFragment;
 
 import java.util.ArrayList;
 
-public class UserTransactionActivity extends AppCompatActivity {
+public class TransactionHistoryActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private AppPagerAdapter appPagerAdapter;
@@ -30,13 +30,11 @@ public class UserTransactionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getIntent().getIntExtra("type", -1) == DashboardFragment.BORROW) {
-            pagerFragments.add(new PagerFragment(UserTransactionFragment.newInstance(UserTransactionFragment.PENDING), "Applied"));
-        }
+        pagerFragments.add(new PagerFragment(UserTransactionFragment.newInstance(UserTransactionFragment.PENDING), "Applied"));
         pagerFragments.add(new PagerFragment(UserTransactionFragment.newInstance(UserTransactionFragment.OPEN), "Open"));
         pagerFragments.add(new PagerFragment(UserTransactionFragment.newInstance(UserTransactionFragment.CLOSE), "Closed"));
 
-        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());
+        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager(), true);
         appPagerAdapter.setData(pagerFragments);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.user_transaction_tabs);

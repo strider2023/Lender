@@ -21,7 +21,7 @@
     <View
         android:layout_width="@dimen/splash_divider_width"
         android:layout_height="2dp"
-        android:background="@color/colorAccent"
+        android:background="@android:color/white"
         android:layout_margin="10dp"/>
 
     <android.support.v7.widget.AppCompatEditText

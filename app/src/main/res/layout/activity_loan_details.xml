@@ -45,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Borrower"
+                        android:text="@string/borrower"
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
 
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Lender"
+                        android:text="@string/lender"
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
 
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"
                         android:text="@string/na"
-                        android:textColor="@color/colorYellow"
+                        android:textColor="@color/colorYellowLight"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:src="@drawable/ic_supervisor_account_black_48dp"
-                        android:tint="@color/colorYelloLight" />
+                        android:tint="@color/colorYellowLight" />
 
                     <TextView
                         android:id="@+id/loan_details_lender"
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"
                         android:text="@string/na"
-                        android:textColor="@color/colorYellow"
+                        android:textColor="@color/colorYellowLight"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -156,7 +156,7 @@
                         android:fontFamily="sans-serif-light"
                         android:padding="5dp"
                         android:text="@string/na"
-                        android:textColor="@color/colorYelloLight"
+                        android:textColor="@color/colorYellowLight"
                         android:textSize="48sp" />
 
                     <TextView
@@ -255,11 +255,11 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/loan_details_report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@drawable/ic_forum_black_24dp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 

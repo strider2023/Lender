@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_dashboard"
             android:title="@string/title_dashboard"
-            android:icon="@drawable/ic_timeline_black_24dp"
+            android:icon="@drawable/ic_timeline_white_24dp"
             android:checked="true"/>
         <item
             android:id="@+id/nav_lend"
@@ -26,6 +26,10 @@
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_transaction_history"
+            android:title="@string/title_transaction_history"
+            android:icon="@drawable/ic_history_white_24dp"/>
         <item
             android:id="@+id/nav_settings"
             android:title="@string/title_settings"

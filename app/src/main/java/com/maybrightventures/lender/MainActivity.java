@@ -16,9 +16,12 @@ import android.view.MenuItem;
 
 import com.maybrightventures.lender.adapters.AppPagerAdapter;
 import com.maybrightventures.lender.dao.PagerFragment;
-import com.maybrightventures.lender.fragments.DashboardFragment;
+import com.maybrightventures.lender.fragments.BorrowFragment;
+import com.maybrightventures.lender.fragments.DashboardEventsFragment;
+import com.maybrightventures.lender.fragments.DashboardStatsFragment;
+import com.maybrightventures.lender.fragments.DashboardTimelineFragment;
 import com.maybrightventures.lender.fragments.LendFragment;
-import com.maybrightventures.lender.fragments.LenderAllocateFundsFragment;
+import com.maybrightventures.lender.fragments.WalletFragment;
 import com.maybrightventures.lender.util.AppPreferences;
 
 import java.util.ArrayList;
@@ -27,12 +30,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppPreferences appPreferences;
-    private AppPagerAdapter appPagerAdapter;
-    private ViewPager mViewPager;
-    private TabLayout tabLayout;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
+    private AppPagerAdapter appPagerAdapter;
+    private ViewPager mViewPager;
+    private TabLayout tabLayout;
     private ArrayList<PagerFragment> pagerFragments = new ArrayList<>();
     private int navigationMenuId;
 
@@ -44,10 +47,21 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mViewPager = (ViewPager) findViewById(R.id.main_dashboard_container);
-        tabLayout = (TabLayout) findViewById(R.id.main_dashboard_tabs);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        mViewPager = (ViewPager) findViewById(R.id.main_dashboard_container);
+        tabLayout = (TabLayout) findViewById(R.id.main_dashboard_tabs);
+
+        pagerFragments.add(new PagerFragment(DashboardTimelineFragment.newInstance(), "Home"));
+        pagerFragments.add(new PagerFragment(DashboardEventsFragment.newInstance(), "Events"));
+        pagerFragments.add(new PagerFragment(DashboardStatsFragment.newInstance(), "Stats"));
+        appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager(), false);
+        appPagerAdapter.setData(pagerFragments);
+        mViewPager.setAdapter(appPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_developer_board_white_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_event_white_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_timeline_white_24dp);
 
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,7 +88,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt("navigationSelection", navigationMenuId);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -104,44 +117,37 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle(R.string.title_dashboard);
                 mViewPager.setVisibility(View.VISIBLE);
                 tabLayout.setVisibility(View.VISIBLE);
-                findViewById(R.id.main_content_borrow).setVisibility(View.GONE);
-                findViewById(R.id.main_content_manage_wallet).setVisibility(View.GONE);
-
-                pagerFragments.clear();
-                pagerFragments.add(new PagerFragment(DashboardFragment.newInstance(DashboardFragment.LEND), "Lent"));
-                pagerFragments.add(new PagerFragment(DashboardFragment.newInstance(DashboardFragment.BORROW), "Borrowed"));
-                appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());
-                appPagerAdapter.setData(pagerFragments);
-                mViewPager.setAdapter(appPagerAdapter);
-                tabLayout.setupWithViewPager(mViewPager);
+                findViewById(R.id.main_fragment_holder).setVisibility(View.GONE);
                 break;
             case R.id.nav_lend:
                 getSupportActionBar().setSubtitle(R.string.title_lend);
-                mViewPager.setVisibility(View.VISIBLE);
-                tabLayout.setVisibility(View.VISIBLE);
-                findViewById(R.id.main_content_borrow).setVisibility(View.GONE);
-                findViewById(R.id.main_content_manage_wallet).setVisibility(View.GONE);
-
-                pagerFragments.clear();
-                pagerFragments.add(new PagerFragment(LendFragment.newInstance(), "Requests"));
-                pagerFragments.add(new PagerFragment(LenderAllocateFundsFragment.newInstance(), "Allocate Funds"));
-                appPagerAdapter = new AppPagerAdapter(getSupportFragmentManager());
-                appPagerAdapter.setData(pagerFragments);
-                mViewPager.setAdapter(appPagerAdapter);
-                tabLayout.setupWithViewPager(mViewPager);
+                mViewPager.setVisibility(View.GONE);
+                tabLayout.setVisibility(View.GONE);
+                findViewById(R.id.main_fragment_holder).setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_fragment_holder, LendFragment.newInstance())
+                        .commit();
                 break;
             case R.id.nav_borrow:
                 getSupportActionBar().setSubtitle(R.string.title_borrow);
                 mViewPager.setVisibility(View.GONE);
                 tabLayout.setVisibility(View.GONE);
-                findViewById(R.id.main_content_borrow).setVisibility(View.VISIBLE);
-                findViewById(R.id.main_content_manage_wallet).setVisibility(View.GONE);
+                findViewById(R.id.main_fragment_holder).setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_fragment_holder, BorrowFragment.newInstance())
+                        .commit();
                 break;
             case R.id.nav_manage_wallet:
+                getSupportActionBar().setSubtitle(R.string.title_wallet);
                 mViewPager.setVisibility(View.GONE);
                 tabLayout.setVisibility(View.GONE);
-                findViewById(R.id.main_content_borrow).setVisibility(View.GONE);
-                findViewById(R.id.main_content_manage_wallet).setVisibility(View.VISIBLE);
+                findViewById(R.id.main_fragment_holder).setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_fragment_holder, WalletFragment.newInstance())
+                        .commit();
+                break;
+            case R.id.nav_transaction_history:
+                startActivity(new Intent(MainActivity.this, TransactionHistoryActivity.class));
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(MainActivity.this, ProfileSettingsActivity.class));

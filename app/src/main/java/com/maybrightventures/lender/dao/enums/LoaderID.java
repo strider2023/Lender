@@ -4,8 +4,8 @@ package com.maybrightventures.lender.dao.enums;
  * Created by arindamnath on 18/01/16.
  */
 public enum LoaderID {
-    PAYMENT_DUE(1),
-    REPAYMENT_DUE(2),
+    EVENTS(1),
+    TIMELINE(2),
     OPEN_TRANSACTIONS(3),
     CLOSE_TRANSACTION(4),
     PENDING_TRANSACTIONS(5),
