@@ -49,6 +49,8 @@
     <string name="posted_on">Posted On</string>
     <string name="filter_by">Filter By</string>
     <string name="view_transactions">View Transactions</string>
+    <string name="query">Query</string>
+    <string name="send">Send</string>
     
     <string name="msg_mobile_otp_main">Sit back and relax, while we verify your mobile number.</string>
     <string name="msg_mobile_otp_secondary">Enter the OTP code manually, in case we fail to detect SMS automatically.</string>
