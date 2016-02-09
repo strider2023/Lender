@@ -1,6 +1,6 @@
 <resources>
     <string name="fb_app_id">1001370053268052</string>
-    <string name="app_name">InstaCredit</string>
+    <string name="app_name">Pokket</string>
     <string name="rupee">₹</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -48,14 +48,15 @@
     <string name="loan_id_hint">Example: AD134ADD12SX</string>
     <string name="posted_on">Posted On</string>
     <string name="filter_by">Filter By</string>
+    <string name="view_transactions">View Transactions</string>
     
     <string name="msg_mobile_otp_main">Sit back and relax, while we verify your mobile number.</string>
     <string name="msg_mobile_otp_secondary">Enter the OTP code manually, in case we fail to detect SMS automatically.</string>
     <string name="msg_sign_up_main">Almost Done</string>
     <string name="msg_sign_up_secondary">Just check if we got your profile info correct. If not please do let us know!</string>
 
-    <string name="screen1_title">Unlimited Calls</string>
-    <string name="screen1_desc">Call your friends, family, Relatives free of cost anytime anywhere.</string>
+    <string name="screen1_title">Money when you need</string>
+    <string name="screen1_desc">Instant money wherever and whenever you need it!</string>
     <string name="screen2_title">Group Conversations</string>
     <string name="screen2_desc">Create your own group and share Snapshots, Videos etc. </string>
     <string name="screen3_title">Synchronize with your laptop</string>
@@ -135,6 +136,7 @@
     <string name="title_wallet">Wallet</string>
     <string name="title_contact_us">Contact Us</string>
     <string name="title_settings">Settings</string>
+    <string name="title_rate_us">Rate Us</string>
     <string name="title_logout">Logout</string>
     <string name="title_transaction_history">Transaction History</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>

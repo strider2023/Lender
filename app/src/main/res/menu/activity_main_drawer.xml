@@ -24,7 +24,7 @@
     </group>
 
     <group
-        android:id="@+id/menu_bottom"
+        android:id="@+id/menu_middle"
         android:checkableBehavior="none">
         <item
             android:id="@+id/nav_transaction_history"
@@ -35,13 +35,22 @@
             android:title="@string/title_settings"
             android:icon="@drawable/ic_settings_black_24dp"/>
         <item
+            android:id="@+id/nav_logout"
+            android:title="@string/title_logout"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
             android:id="@+id/nav_contact"
             android:title="@string/title_contact_us"
             android:icon="@drawable/ic_forum_black_24dp"/>
         <item
-            android:id="@+id/nav_logout"
-            android:title="@string/title_logout"
-            android:icon="@drawable/ic_exit_to_app_black_24dp"/>
+            android:id="@+id/nav_rate_us"
+            android:title="@string/title_rate_us"
+            android:icon="@drawable/ic_stars_black_24dp"/>
     </group>
 
 </menu>

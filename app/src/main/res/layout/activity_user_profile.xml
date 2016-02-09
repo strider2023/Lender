@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.maybrightventures.lender.UserProfileActivity">
+    tools:context="com.maybrightventures.pokket.UserProfileActivity">
 
     <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
         android:fitsSystemWindows="true" android:layout_height="@dimen/app_bar_height"
@@ -29,7 +29,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_user_profile" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.maybrightventures.lender.UserProfileActivity">
+        tools:context="com.maybrightventures.pokket.UserProfileActivity">
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin" android:text="" />

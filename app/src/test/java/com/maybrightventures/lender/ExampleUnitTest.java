@@ -1,4 +1,4 @@
-package com.maybrightventures.lender;
+package com.maybrightventures.pokket;
 
 import org.junit.Test;
 
