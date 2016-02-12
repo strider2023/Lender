@@ -22,13 +22,19 @@ public class AppPreferences {
         } else if(userName.length == 2) {
             edit.putString("userFirstName", userName[0]);
             edit.putString("userLastName", userName[1]);
-        } else if(userName.length >= 3) {
+        } else if(userName.length > 2) {
             edit.putString("userFirstName", userName[0]);
             edit.putString("userMiddleName", userName[1]);
             edit.putString("userLastName", userName[2]);
         }
         edit.putString("userEmail", email);
         edit.putString("userPhone", phone);
+        edit.commit();
+    }
+
+    public void saveSessionToken(String token) {
+        SharedPreferences.Editor edit = mAppPrefs.edit();
+        edit.putString("sessionToken", token);
         edit.commit();
     }
 

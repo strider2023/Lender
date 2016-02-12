@@ -1,23 +1,33 @@
 package com.mbv.pokket;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mbv.pokket.dao.enums.ServerEvents;
+import com.mbv.pokket.dao.interfaces.ServerResponseListener;
+import com.mbv.pokket.threads.VerificationTask;
+import com.mbv.pokket.util.SMSReceiver;
+
 /**
  * Created by arindamnath on 04/01/16.
  */
-public class MobileOTPActivity extends AppCompatActivity implements TextWatcher {
+public class MobileOTPActivity extends AppCompatActivity implements TextWatcher, ServerResponseListener {
 
     private Button verfiyOTP;
     private TextView regenerateOTP;
     private EditText otpCode;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +52,32 @@ public class MobileOTPActivity extends AppCompatActivity implements TextWatcher 
         regenerateOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new VerificationTask(1, v.getContext(), MobileOTPActivity.this).execute(new String[]{""});
             }
         });
+
+        broadcastReceiver =  new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle b = intent.getExtras();
+                String message = b.getString("otp");
+                otpCode.setText(message);
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, new IntentFilter(SMSReceiver.OTP_BROADCAST_TAG));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
     }
 
     @Override
@@ -63,6 +96,16 @@ public class MobileOTPActivity extends AppCompatActivity implements TextWatcher 
 
     @Override
     public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onSuccess(int threadId, Object object) {
+
+    }
+
+    @Override
+    public void onFaliure(ServerEvents serverEvents, Object object) {
 
     }
 }

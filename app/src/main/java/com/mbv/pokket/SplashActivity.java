@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.mbv.pokket.dao.enums.ServerEvents;
 import com.mbv.pokket.dao.interfaces.ServerResponseListener;
 import com.mbv.pokket.threads.AuthenticationTask;
 import com.mbv.pokket.threads.SignUpTask;
@@ -216,7 +217,7 @@ public class SplashActivity extends Activity implements TextWatcher, ServerRespo
     }
 
     @Override
-    public void onSuccess(int threadId) {
+    public void onSuccess(int threadId, Object object) {
         switch (threadId) {
             case 1:
                 appPreferences.setLoggedIn();
@@ -232,7 +233,7 @@ public class SplashActivity extends Activity implements TextWatcher, ServerRespo
     }
 
     @Override
-    public void onFaliure() {
+    public void onFaliure(ServerEvents serverEvents, Object object) {
 
     }
 
